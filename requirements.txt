@@ -1,0 +1,4 @@
+bane
+bs4
+termcolor
+requests

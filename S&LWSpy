@@ -1,0 +1,68 @@
+#N0rdFunction
+#Simple & Light web scanner - SLWS
+import requests
+from bs4 import BeautifulSoup
+from termcolor import colored, cprint
+import os
+import bane
+
+
+os.system("clear")
+cprint('''
+****************** ******************
+****************** ******************
+****************** ******************
+****************** ******************
+********* ******** ******** *********
+******* *********   ******** ********
+****** *********     ********* ******
+***** ********         ******** *****
+***** *******            ****** *****
+***** ******             ****** *****
+* **** ****               **** **** *
+** **** ***               *** **** **
+**** **** **             ** **** ****
+* ****  *** *    * *    * ***  **** *
+** ****** ****  *   *  **** ****** **
+*** **** *****         ***** **** ***
+*****  ********  * *  ********  *****
+*****************   *****************
+*************************************
+*************************************
+''', 'red')
+
+tgt = input("Target URL --> ")
+print()
+cprint('LINKS -->', 'red', attrs=['blink'])
+print()
+page = requests.get(
+    tgt)
+soup = BeautifulSoup(page.content, 'html.parser')
+
+all_links = []
+
+links = soup.select('a')
+for ahref in links:
+    text = ahref.text
+    text = text.strip() if text is not None else ''
+
+    href = ahref.get('href')
+    href = href.strip() if href is not None else ''
+    all_links.append({"href": href, "text": text})
+
+print(all_links)
+
+print(tgt)
+
+bane.xss(tgt)
+ 
+
+    
+    
+    
+    
+    
+    
+    
+
+
